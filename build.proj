@@ -3,6 +3,7 @@
 		<RootDir Condition="'$(teamcity_build_checkoutDir)' == '' And '$(RootDir)'==''">$(MSBuildProjectDirectory)/..</RootDir>
 		<RootDir Condition="'$(teamcity_build_checkoutDir)' != ''">$(teamcity_build_checkoutDir)</RootDir>
 		<HomeDir>$(teamcity_agent_home_dir)</HomeDir>
+		<HomeDir2>$(agent_home_dir)</HomeDir2>
 		<Version>$(teamcity_version)</Version>
 	</PropertyGroup>
 
@@ -20,8 +21,9 @@
 
 	<Target Name="echo">
 		<Message Text="/p:RootDir=$(teamcity.build.checkoutDir) /p:agent_home_dir=$(teamcity.agent.home.dir) /p:teamcity_version=$(system.teamcity.version) home_dir=$(agent_home_dir), ver=$(teamcity_version) RootDir=$(RootDir)" />
+		<Message Text="/p:RootDir=$(teamcityBuildCheckoutDir) /p:agent_home_dir=$(teamcityAgentHomeDir) BCD=$(BuildCheckoutDir); AHD=$(AgentHomeDir)" />
 		<Message Text="teamcity_build_checkoutDir=$(teamcity_build_checkoutDir) build_checkoutDir=$(build_checkoutDir) checkoutDir=$(checkoutDir) tc_agent_home_dir=$(teamcity_agent_home_dir) ahd=$(agent_home_dir) hd=$(home_dir)  teamcity_version=$(teamcity_version)"/>
-		<Message Text="RootDir=$(RootDir); HomeDir=$(HomeDir); Version=$(Version)"/>
+		<Message Text="RootDir=$(RootDir); HomeDir=$(HomeDir); Version=$(Version); HomeDir2=$(HomeDir2)"/>
 	 </Target>
 
 	<Target Name="Test">
