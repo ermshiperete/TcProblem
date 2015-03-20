@@ -16,6 +16,10 @@
 		<TestAssemblies Include="$(RootDir)/bin/Debug/*.exe"/>
 	</ItemGroup>
 
+	<Target Name="echo">
+		<Message Text="/p:RootDir=%teamcity.build.checkoutDir% /p:agent_home_dir=%teamcity.agent.home.dir% /p:teamcity_version=%system.teamcity.version%" />
+	</Target>
+
 	<Target Name="Test">
 		<CallTarget Targets="TestOnly"/>
 	</Target>
