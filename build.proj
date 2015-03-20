@@ -1,7 +1,9 @@
 <Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
 	<PropertyGroup>
-		<RootDir Condition="'$(teamcity_build_checkoutDir)' == '' And '$(RootDir)'==''">$(MSBuildProjectDirectory)</RootDir>
+		<RootDir Condition="'$(teamcity_build_checkoutDir)' == '' And '$(RootDir)'==''">$(MSBuildProjectDirectory)/..</RootDir>
 		<RootDir Condition="'$(teamcity_build_checkoutDir)' != ''">$(teamcity_build_checkoutDir)</RootDir>
+		<HomeDir>$(teamcity_agent_home_dir)</HomeDir>
+		<Version>$(teamcity_version)</Version>
 	</PropertyGroup>
 
 	<UsingTask TaskName="NUnit" AssemblyFile="$(RootDir)/Palaso.BuildTasks.dll" />
@@ -19,6 +21,7 @@
 	<Target Name="echo">
 		<Message Text="/p:RootDir=$(teamcity.build.checkoutDir) /p:agent_home_dir=$(teamcity.agent.home.dir) /p:teamcity_version=$(system.teamcity.version) home_dir=$(agent_home_dir), ver=$(teamcity_version) RootDir=$(RootDir)" />
 		<Message Text="teamcity_build_checkoutDir=$(teamcity_build_checkoutDir) build_checkoutDir=$(build_checkoutDir) checkoutDir=$(checkoutDir) tc_agent_home_dir=$(teamcity_agent_home_dir) ahd=$(agent_home_dir) hd=$(home_dir)  teamcity_version=$(teamcity_version)"/>
+		<Message Text="RootDir=$(RootDir); HomeDir=$(HomeDir); Version=$(Version)"/>
 	 </Target>
 
 	<Target Name="Test">
